@@ -2,6 +2,7 @@ package org.opentripplanner;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.collect.Lists;
+import org.opentripplanner.graph_builder.module.AddTransitModelEntitiesToGraph;
 import org.opentripplanner.graph_builder.module.StreetLinkerModule;
 import org.opentripplanner.graph_builder.module.osm.OpenStreetMapModule;
 import org.opentripplanner.graph_builder.services.GraphBuilderModule;
@@ -108,6 +109,7 @@ public class ConstantsForTests {
                 portlandContext = contextBuilder(ConstantsForTests.PORTLAND_GTFS)
                         .withGraphBuilderAnnotationsAndDeduplicator(portlandGraph)
                         .build();
+                AddTransitModelEntitiesToGraph.addToGraph(portlandContext, portlandGraph);
                 PatternHopFactory factory = new PatternHopFactory(portlandContext);
                 factory.run(portlandGraph);
             }
@@ -167,6 +169,8 @@ public class ConstantsForTests {
             e.printStackTrace();
             return null;
         }
+        AddTransitModelEntitiesToGraph.addToGraph(context, graph);
+
         PatternHopFactory factory = new PatternHopFactory(context);
         factory.run(graph);
         graph.putService(
