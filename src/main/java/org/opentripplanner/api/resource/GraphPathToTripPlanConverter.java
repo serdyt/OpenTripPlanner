@@ -154,7 +154,7 @@ public abstract class GraphPathToTripPlanConverter {
      * at the leg boundaries. These smaller state arrays are then used to generate legs. Finally the
      * rest of the itinerary is generated based on the complete state array.
      *
-     * @param path                  The graph path to base the itinerary on
+     * @param path The graph path to base the itinerary on
      * @param showIntermediateStops Whether to include intermediate stops in the itinerary or not
      * @return The generated itinerary
      */
@@ -1397,6 +1397,11 @@ public abstract class GraphPathToTripPlanConverter {
                             steps.remove(last - 1);
 
                             lastStep.distance += twoBack.distance;
+                            lastStep.duration += twoBack.duration;
+
+                            // A U-turn to the left, typical in the US. 
+                            if (lastStep.relativeDirection == RelativeDirection.LEFT || 
+                                    lastStep.relativeDirection == RelativeDirection.HARD_LEFT)
 
                             // A U-turn to the left, typical in the US.
                             if (lastStep.relativeDirection == RelativeDirection.LEFT ||
@@ -1417,6 +1422,7 @@ public abstract class GraphPathToTripPlanConverter {
                             steps.remove(last - 1);
                             step = threeBack;
                             step.distance += twoBack.distance;
+                            step.duration += twoBack.duration;
                             distance += step.distance;
                             if (twoBack.elevation != null) {
                                 if (step.elevation == null) {
@@ -1446,6 +1452,7 @@ public abstract class GraphPathToTripPlanConverter {
 
             // increment the total length for this step
             step.distance += edge.getDistance();
+            step.duration += forwardState.getTimeDeltaSeconds();
             step.addAlerts(graph.streetNotesService.getNotes(forwardState), requestedLocale);
             lastAngle = DirectionUtils.getLastAngle(geom);
 

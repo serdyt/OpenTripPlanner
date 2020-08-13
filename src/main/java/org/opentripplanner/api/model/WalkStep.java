@@ -68,6 +68,8 @@ public class WalkStep {
      */
     public double distance = 0;
 
+    public double duration = 0;
+
     /**
      * The relative direction of this step.
      */

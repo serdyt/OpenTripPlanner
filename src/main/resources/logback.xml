@@ -18,6 +18,14 @@
     </encoder>
   </appender>
 
+  <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+    <file>/home/ai6644/Malmo/Tools/DRTsim/output/log.log</file>
+    <encoder>
+      <!-- print out file and line number in parenthesis, which Eclipse and IDEA will link -->
+      <pattern>%d{HH:mm:ss.SSS} %level \(%F:%L\) %msg%n</pattern>
+    </encoder>
+  </appender>
+
   <!-- Change this to debug to let more messages through. -->
   <root level="info">
     <appender-ref ref="stdout" />
@@ -27,6 +35,15 @@
   <logger name="org.apache.http" level="info" />
   <logger name="com.conveyal" level="info"/>
 
+  <logger name="org.opentripplanner.scripting" level="info">
+    <appender-ref ref="FILE"/>
+  </logger>
+  <logger name="org.opentripplanner.scripting.api" level="info">
+    <appender-ref ref="FILE"/>
+  </logger>
+  <logger name="org.opentripplanner.scripting.api.OtpsRouter" level="info" additivity="true">
+    <appender-ref ref="FILE"/>
+  </logger>
   <logger name="org.opentripplanner.graph_builder.module.DirectTransferGenerator" level="info" />
   <logger name="org.opentripplanner" level="info" />
   <logger name="org.opentripplanner.analyst" level="info" />
