@@ -24,7 +24,7 @@ import org.opentripplanner.updater.example.ExampleGraphUpdater;
 import org.opentripplanner.updater.example.ExamplePollingGraphUpdater;
 import org.opentripplanner.updater.siri.SiriActiveMQUpdater;
 import org.opentripplanner.updater.siri.SiriETUpdater;
-import org.opentripplanner.updater.siri.SiriEstimatedTimetableGooglePubsubUpdater;
+//import org.opentripplanner.updater.siri.SiriEstimatedTimetableGooglePubsubUpdater;
 import org.opentripplanner.updater.siri.SiriLiteETUpdater;
 import org.opentripplanner.updater.siri.SiriLiteVMUpdater;
 import org.opentripplanner.updater.siri.SiriVMUpdater;
@@ -132,7 +132,7 @@ public abstract class GraphUpdaterConfigurator {
                     updater = new SiriETUpdater();
                 }
                 else if (type.equals("google-pubsub-siri-et-updater")) {
-                    updater = new SiriEstimatedTimetableGooglePubsubUpdater();
+//                    updater = new SiriEstimatedTimetableGooglePubsubUpdater();
                 }
                 else if (type.equals("siri-activemq-updater-et")) {
                     updater = new SiriActiveMQUpdater();
